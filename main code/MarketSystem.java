@@ -16,11 +16,13 @@ abstract class User{
     private String name;
     private String id;
 
+    //setter
    public User(String name, String id){
         this.name = name;
         this.id = id;
     }
 
+    //getter
     public String getName(){
          return name; 
     }
@@ -30,13 +32,14 @@ abstract class User{
     }
     //admin and customer both share method to display products list
     public void view_products(ArrayList<Product> products){
+        //if no product in array return no product
         if(products.size() == 0){
             System.out.println("No products available."+"\n");
-            return;
         }
+        //else print the item
         else{
         for(int i=0; i<products.size(); i++){
-            System.out.println((i+1) + ". " + products.get(i).Product_name + " - $" + products.get(i).Product_price);
+            System.out.println((i+1) + ". " + products.get(i).Product_name + " - RM" + products.get(i).Product_price);
         }
     }
     }
@@ -45,6 +48,17 @@ abstract class User{
 class Admin extends User{
     public Admin(String name, String id){
         super(name, id);
+    }
+
+    //method to let admin add item into array
+    public void add_item(ArrayList<Product> products,Scanner sc){
+    System.out.println("Enter the name of the product :");
+    String Pname= sc.nextLine();
+    System.out.println("Enter the price of the product :");
+    Double Pprice= sc.nextDouble();
+
+    products.add(new Product(Pname, Pprice));
+    sc.nextLine();
     }
 }
 //class Customer extends subclass of User
@@ -70,6 +84,7 @@ public class MarketSystem {
         System.out.println("**************    Enter 0 to quit       **************");
         System.out.println("******************************************************");
        
+        //if user input data besides integer return reason
         try{
         select = sc.nextInt();
         sc.nextLine();
@@ -80,7 +95,8 @@ public class MarketSystem {
         continue;
        }
        
-       if(select !=1 && select !=2 && select !=0){
+       //stop wrong selection
+       if(select !=1 && select !=2 && select !=0 ){
         System.out.println("Invalid selection, please try again."+"\n");
         continue;
        }
@@ -113,6 +129,7 @@ public class MarketSystem {
                     System.out.println("0. Return to Main Menu");
                     System.out.println("***************************************");
                     
+                    //if user input data besides integer return reason
                     try{
                     adminChoice = sc.nextInt();
                     sc.nextLine();
@@ -123,6 +140,7 @@ public class MarketSystem {
                         continue;
                        }
 
+                    //stop wrong selection
                     if(adminChoice !=1 && adminChoice !=2 && adminChoice !=0 && adminChoice !=3 && adminChoice !=4 ){
                     System.out.println("Invalid selection, please try again."+"\n");
                     continue;
@@ -136,13 +154,16 @@ public class MarketSystem {
                             sc.nextLine();
                             break;
                         case 2:
-                            // Add product logic
+                            admin.add_item(products, sc);
+                            System.out.println("Press Enter to continue..."+"\n");
+                            sc.nextLine();
                             break;
                         case 3:
                             // Remove product logic
                             break;
                         case 4:
                             // Edit product logic
+                            break;
                         case 0:
                         System.out.println("Returning to main menu!");
                         System.out.println("Press Enter to continue..."+"\n");
@@ -232,4 +253,4 @@ public class MarketSystem {
     }
     sc.close();
 }
-}//test git push
+}
