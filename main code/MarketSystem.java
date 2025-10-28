@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 //code for a market system
+
 //class Product
 class Product{
     public String Product_name;
@@ -109,6 +110,7 @@ class Admin extends User{
         else{
         while (true) {
         //show products list every loops
+        System.out.println("Product list: ");
         view_products(products);
         try{
         System.out.println("Select the product to edit");
@@ -142,6 +144,64 @@ class Admin extends User{
 class Customer extends User{
     public Customer(String name, String id){
         super(name, id);
+    }
+
+    public void add_to_cart(ArrayList<Product> products, ArrayList<Product> cart, Scanner sc){
+        if(products.size()==0){
+             System.out.println("No products available."+"\n");
+        }
+        else{
+        while (true) {
+        //show products list every loops
+        System.out.println("Product list: ");
+        view_products(products);
+        try{
+        System.out.println("Select the product to add to cart");
+        int add=sc.nextInt();
+        sc.nextLine();
+
+        //add selected product into cart array
+        cart.add(products.get(add-1));
+        System.out.println("Product added to cart successfully"+"\n");
+        break;
+        }
+        catch(Exception E){
+            System.out.println("Error input"+"\n");
+            sc.nextLine();
+            continue;
+        }
+        }
+    }
+    }
+    
+    public void delete_from_cart(ArrayList<Product> cart, Scanner sc){
+        if(cart.size()==0){
+             System.out.println("No products in cart."+"\n");
+        }
+        else{
+        while (true) {
+        //show cart list every loops
+        System.out.println("Cart list: ");
+        for(int i=0; i<cart.size(); i++){
+            System.out.println((i+1) + ". " + cart.get(i).Product_name + " - RM " + cart.get(i).Product_price);
+        }
+        try{
+        System.out.println("Select the product to delete from cart");
+        int delete=sc.nextInt();
+        sc.nextLine();
+
+        //remove selected product from cart array
+        cart.remove(delete-1);
+        System.out.println("Product removed from cart successfully"+"\n");
+        break;
+        }
+        catch(Exception E){
+            System.out.println("Error input"+"\n");
+            sc.nextLine();
+            continue;
+        }
+        }
+    }
     }
 }
 public class MarketSystem {
@@ -262,7 +322,7 @@ public class MarketSystem {
                             break;
                         case 0:
                         //while user enter 0 condition of while(adminRunning) turns to false and break the loop for admin menu
-                        System.out.println("Returning to main menu!");
+                        System.out.println("Returning to Main menu!"+"\n");
                         System.out.println("Press Enter to continue..."+"\n");
                         sc.nextLine();
                         adminRunning = false;
@@ -326,7 +386,10 @@ public class MarketSystem {
                             sc.nextLine();
                             break;
                         case 2:
-                            // Purchase product logic
+                        //call add to cart method
+                            customer.add_to_cart(products, cart, sc);
+                            System.out.println("Press Enter to continue..."+"\n");
+                            sc.nextLine();
                             break;
                         case 3:
                             // Remove product from cart logic
