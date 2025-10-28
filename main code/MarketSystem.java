@@ -392,7 +392,10 @@ public class MarketSystem {
                             sc.nextLine();
                             break;
                         case 3:
-                            // Remove product from cart logic
+                        //call delete from cart method
+                            customer.delete_from_cart( cart, sc);
+                            System.out.println("Press Enter to continue..."+"\n");
+                            sc.nextLine();
                             break;
                         case 4:
                             // Check cart logic
