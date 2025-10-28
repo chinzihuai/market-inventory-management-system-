@@ -1,443 +1,373 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-//code for a market system
-
-//class Product
-class Product{
+// code for a market system
+// class Product
+class Product {
     public String Product_name;
     public double Product_price;
-
-    public Product(String name, double price){
+    public Product(String name, double price) {
         this.Product_name = name;
         this.Product_price = price;
     }
 }
-//abstract class User
-abstract class User{
+// abstract class User
+abstract class User {
     private String name;
     private String id;
-
-    //setter
-   public User(String name, String id){
+    // setter
+    public User(String name, String id) {
         this.name = name;
         this.id = id;
     }
-
-    //getter
-    public String getName(){
-         return name; 
+    // getter
+    public String getName() {
+        return name;
     }
-
-    public String getId(){ 
-        return id; 
+    public String getId() {
+        return id;
     }
-    //admin and customer both share method to display products list
-    public void view_products(ArrayList<Product> products){
-        //if no product in array return no product
-        if(products.size() == 0){
-            System.out.println("No products available."+"\n");
+    // admin and customer both share method to display products list
+    public void view_products(ArrayList < Product > products) { // if no product in array return no product
+        if (products.size() == 0) {
+            System.out.println("No products available." + "\n");
         }
-        //else print the item
-        else{
-        for(int i=0; i<products.size(); i++){
-            System.out.println((i+1) + ". " + products.get(i).Product_name + " - RM " + products.get(i).Product_price);
+        // else print the item else {
+            for (int i = 0; i < products.size(); i ++) {
+                System.out.println((i + 1) + ". " + products.get(i).Product_name + " - RM " + products.get(i).Product_price);
+            }
         }
     }
-    }
-}
-//class Admin extends subclass of User
-class Admin extends User{
-
-    public Admin(String name, String id){
+// class Admin extends subclass of User
+class Admin extends User {
+    public Admin(String name, String id) {
         super(name, id);
     }
-
-    //method to let admin add item into array
-    public void add_item(ArrayList<Product> products,Scanner sc){
-    System.out.println("Enter the name of the product :");
-    String Product_name= sc.nextLine();
-
-    while(true){
-    try{
-    System.out.println("Enter the price of the product :");
-    double Product_price= sc.nextDouble();
-    sc.nextLine();
-
-    //add name and price of new object into array
-    products.add(new Product(Product_name,Product_price));
-    break;
-    }
-
-    catch(Exception e){
-        System.out.println("Unvailable value, enetr again"+"\n");
-        sc.nextLine();
-        continue;
-    }
- }
-    System.out.println("Product add successfully"+"\n");
-}
-
-    //method to let admin delete product
-    public void delete_item(ArrayList<Product> products,Scanner sc){
-    
-    //display product list for user
-    if(products.size()==0){
-             System.out.println("No products available."+"\n");
-    }
-    else{
-    while (true) {
-    System.out.println("Product list: ");
-    view_products(products);
-    try{
-    System.out.println("Choose the product (1,2,3....) to delete");
-    int position=sc.nextInt();
-    sc.nextLine();
-
-    //remove product at selected position from array
-    products.remove(position-1);
-    System.out.println("The product delete successfully"+"\n");
-    break;
-    }
-
-    catch(Exception E){
-        System.out.println("Unvailable value, enetr again"+"\n");
-        sc.nextLine();
-        continue;
-    }
- }
-}
-    }
-    
-    public void manage_item(ArrayList<Product> products,Scanner sc){
-        if(products.size()==0){
-             System.out.println("No products available."+"\n");
-        }
-        else{
+    // method to let admin add item into array
+    public void add_item(ArrayList < Product > products, Scanner sc) {
+        System.out.println("Enter the name of the product :");
+        String Product_name = sc.nextLine();
         while (true) {
-        //show products list every loops
-        System.out.println("Product list: ");
-        view_products(products);
-        try{
-        System.out.println("Select the product to edit");
-        int edit=sc.nextInt();
-        sc.nextLine();
-
-        //product.get(edit-1).Product_name means the Product_name at postion(edit-1)of array
-        System.out.println("Editing "+products.get(edit-1).Product_name+"\n");
-
-        System.out.println("Enter the new name for product");
-        String new_name=sc.nextLine();
-        products.get(edit-1).Product_name=new_name;
-
-        System.out.println("Enter the new price for product");
-        Double new_price=sc.nextDouble();
-        products.get(edit-1).Product_price=new_price;
-
-        System.out.println("Item change successfully"+"\n");
-        break;
+            try {
+                System.out.println("Enter the price of the product :");
+                double Product_price = sc.nextDouble();
+                sc.nextLine();
+                // add name and price of new object into array
+                products.add(new Product(Product_name, Product_price));
+                break;
+            } catch (Exception e) {
+                System.out.println("Unvailable value, enetr again" + "\n");
+                sc.nextLine();
+                continue;
+            }
         }
-        catch(Exception E){
-            System.out.println("Error input"+"\n");
-            sc.nextLine();
-            continue;
-        }
+        System.out.println("Product add successfully" + "\n");
+    }
+    // method to let admin delete product
+    public void delete_item(ArrayList < Product > products, Scanner sc) { // display product list for user
+        if (products.size() == 0) {
+            System.out.println("No products available." + "\n");
+        } else {
+            while (true) {
+                System.out.println("Product list: ");
+                view_products(products);
+                try {
+                    System.out.println("Choose the product (1,2,3....) to delete");
+                    int position = sc.nextInt();
+                    sc.nextLine();
+                    // remove product at selected position from array
+                    products.remove(position - 1);
+                    System.out.println("The product delete successfully" + "\n");
+                    break;
+                } catch (Exception E) {
+                    System.out.println("Unvailable value, enetr again" + "\n");
+                    sc.nextLine();
+                    continue;
+                }
+            }
         }
     }
+    public void manage_item(ArrayList < Product > products, Scanner sc) {
+        if (products.size() == 0) {
+            System.out.println("No products available." + "\n");
+        } else {
+            while (true) { // show products list every loops
+                System.out.println("Product list: ");
+                view_products(products);
+                try {
+                    System.out.println("Select the product to edit");
+                    int edit = sc.nextInt();
+                    sc.nextLine();
+                    // product.get(edit-1).Product_name means the Product_name at postion(edit-1)of array
+                    System.out.println("Editing " + products.get(edit - 1).Product_name + "\n");
+                    System.out.println("Enter the new name for product");
+                    String new_name = sc.nextLine();
+                    products.get(edit - 1).Product_name = new_name;
+                    System.out.println("Enter the new price for product");
+                    Double new_price = sc.nextDouble();
+                    products.get(edit - 1).Product_price = new_price;
+                    System.out.println("Item change successfully" + "\n");
+                    break;
+                } catch (Exception E) {
+                    System.out.println("Error input" + "\n");
+                    sc.nextLine();
+                    continue;
+                }
+            }
+        }
     }
 }
-//class Customer extends subclass of User
-class Customer extends User{
-    public Customer(String name, String id){
+// class Customer extends subclass of User
+class Customer extends User {
+    public Customer(String name, String id) {
         super(name, id);
     }
-
-    public void add_to_cart(ArrayList<Product> products, ArrayList<Product> cart, Scanner sc){
-        if(products.size()==0){
-             System.out.println("No products available."+"\n");
-        }
-        else{
-        while (true) {
-        //show products list every loops
-        System.out.println("Product list: ");
-        view_products(products);
-        try{
-        System.out.println("Select the product to add to cart");
-        int add=sc.nextInt();
-        sc.nextLine();
-
-        //add selected product into cart array
-        cart.add(products.get(add-1));
-        System.out.println("Product added to cart successfully"+"\n");
-        break;
-        }
-        catch(Exception E){
-            System.out.println("Error input"+"\n");
-            sc.nextLine();
-            continue;
-        }
+    public void add_to_cart(ArrayList < Product > products, ArrayList < Product > cart, Scanner sc) {
+        if (products.size() == 0) {
+            System.out.println("No products available." + "\n");
+        } else {
+            while (true) { // show products list every loops
+                System.out.println("Product list: ");
+                view_products(products);
+                try {
+                    System.out.println("Select the product to add to cart");
+                    int add = sc.nextInt();
+                    sc.nextLine();
+                    // add selected product into cart array
+                    cart.add(products.get(add - 1));
+                    System.out.println("Product added to cart successfully" + "\n");
+                    break;
+                } catch (Exception E) {
+                    System.out.println("Error input" + "\n");
+                    sc.nextLine();
+                    continue;
+                }
+            }
         }
     }
-    }
-    
-    public void delete_from_cart(ArrayList<Product> cart, Scanner sc){
-        if(cart.size()==0){
-             System.out.println("No products in cart."+"\n");
-        }
-        else{
-        while (true) {
-        //show cart list every loops
-        System.out.println("Cart list: ");
-        for(int i=0; i<cart.size(); i++){
-            System.out.println((i+1) + ". " + cart.get(i).Product_name + " - RM " + cart.get(i).Product_price);
-        }
-        try{
-        System.out.println("Select the product to delete from cart");
-        int delete=sc.nextInt();
-        sc.nextLine();
-
-        //remove selected product from cart array
-        cart.remove(delete-1);
-        System.out.println("Product removed from cart successfully"+"\n");
-        break;
-        }
-        catch(Exception E){
-            System.out.println("Error input"+"\n");
-            sc.nextLine();
-            continue;
-        }
+    public void delete_from_cart(ArrayList < Product > cart, Scanner sc) {
+        if (cart.size() == 0) {
+            System.out.println("No products in cart." + "\n");
+        } else {
+            while (true) { // show cart list every loops
+                System.out.println("Cart list: ");
+                for (int i = 0; i < cart.size(); i ++) {
+                    System.out.println((i + 1) + ". " + cart.get(i).Product_name + " - RM " + cart.get(i).Product_price);
+                }
+                try {
+                    System.out.println("Select the product to delete from cart");
+                    int delete = sc.nextInt();
+                    sc.nextLine();
+                    // remove selected product from cart array
+                    cart.remove(delete - 1);
+                    System.out.println("Product removed from cart successfully" + "\n");
+                    break;
+                } catch (Exception E) {
+                    System.out.println("Error input" + "\n");
+                    sc.nextLine();
+                    continue;
+                }
+            }
         }
     }
-    }
-    public void view_Cart(ArrayList<Product> cart){
-        for(int i=0; i<cart.size(); i++){
-            System.out.println((i+1) + ". " + cart.get(i).Product_name + " - RM " + cart.get(i).Product_price);
+    public void view_Cart(ArrayList < Product > cart) {
+        for (int i = 0; i < cart.size(); i ++) {
+            System.out.println((i + 1) + ". " + cart.get(i).Product_name + " - RM " + cart.get(i).Product_price);
         }
         double total_price = 0.0;
-        for(int i=0; i<cart.size(); i++){
+        for (int i = 0; i < cart.size(); i ++) {
             total_price += cart.get(i).Product_price;
         }
-        System.out.println("Total price: RM "+ total_price+"\n");
+        System.out.println("Total price: RM " + total_price + "\n");
     }
 }
 public class MarketSystem {
-    public static void main(String[] args) throws Exception {
-       Scanner sc =new Scanner(System.in);
-       ArrayList<Product> products = new ArrayList<>();
-       ArrayList<Product> cart = new ArrayList<>();
-    
-    int select=0;
-    boolean running = true;
-
-    while (running) {
-        System.out.println("******************************************************");
-        System.out.println("************** Welcome to Market System **************");
-        System.out.println("**************    Enter 1 for admin     **************");
-        System.out.println("**************    Enter 2 for customer  **************");
-        System.out.println("**************    Enter 0 to quit       **************");
-        System.out.println("******************************************************");
-       
-        //if user input data besides integer return error reason
-        try{
-        select = sc.nextInt();
-        sc.nextLine();
-       }
-       catch(Exception e){
-        System.out.println("Unavailable input,please enter a proper number."+"\n");
-        sc.nextLine();
-        continue;
-       }
-       
-       //if user insert num besides 0 to 4 print error message
-       if(select <0 || select >2 ){
-        System.out.println("Invalid section, pls insert again."+"\n");
-        continue;
-       }
-       else{
-            switch (select) {
-            //case for admin
-            case 1:
-
-            //check admin password to log in
-              System.out.println("Pls enter the admin password:");
-              String passcode = sc.nextLine();
-              if(passcode.equals("Admin123")==false){
-                System.out.println("Wrong passwod,You are not the admin "+"\n");
-                System.out.println("Returning to Main Menu..."+"\n");
-                System.out.println("Press Enter to continue..."+"\n");
+    public static void main(String[] args)throws Exception {
+        Scanner sc = new Scanner(System. in);
+        ArrayList < Product > products = new ArrayList<>();
+        ArrayList < Product > cart = new ArrayList<>();
+        int select = 0;
+        boolean running = true;
+        while (running) {
+            System.out.println("******************************************************");
+            System.out.println("************** Welcome to Market System **************");
+            System.out.println("**************    Enter 1 for admin     **************");
+            System.out.println("**************    Enter 2 for customer  **************");
+            System.out.println("**************    Enter 0 to quit       **************");
+            System.out.println("******************************************************");
+            // if user input data besides integer return error reason
+            try {
+                select = sc.nextInt();
+                sc.nextLine();
+            } catch (Exception e) {
+                System.out.println("Unavailable input,please enter a proper number." + "\n");
                 sc.nextLine();
                 continue;
-              }
-              else{
-              System.out.println("Pls enter your name:");
-              String adminName = sc.nextLine();
-
-              System.out.println("Pls enter your admin ID:");
-              String adminId = sc.nextLine();
-
-              Admin admin = new Admin(adminName, adminId); 
-
-              System.out.println("\n");
-              System.out.println("Welcome Admin " + admin.getName()+ " with ID: " +admin.getId() );
-              System.out.println("\n");
-
-              // Admin menu loop
-              boolean adminRunning = true;
-                while (adminRunning) {
-                    int adminChoice = -1;
-
-                    System.out.println("************** Admin Menu **************");
-                    System.out.println("1. View Products");
-                    System.out.println("2. Add Product");
-                    System.out.println("3. Remove Product");
-                    System.out.println("4. Edit Product");
-                    System.out.println("0. Return to Main Menu");
-                    System.out.println("***************************************");
-                    
-                    //if user input data besides integer return reason
-                    try{
-                    adminChoice = sc.nextInt();
-                    sc.nextLine();
-                    }
-
-                    catch(Exception e){
-                        System.out.println("Unavailable input,please enter a proper number."+"\n");
-                        continue;
-                       }
-
-                    //stop wrong selection
-                    if(adminChoice <0 || adminChoice >4 ){
-                    System.out.println("Invalid section, pls insert again."+"\n");
-                    continue;
-                    }
-                    else{
-                        switch (adminChoice) {
-                        case 1:
-                            // call view products method
-                            admin.view_products(products);
-                            System.out.println("Press Enter to continue..."+"\n");
+            }
+            // if user insert num besides 0 to 4 print error message
+            if (select < 0 || select > 2) {
+                System.out.println("Invalid section, pls insert again." + "\n");
+                continue;
+            } else {
+                switch (select) { // case for admin
+                    case 1:
+                        // check admin password to log in
+                        System.out.println("Pls enter the admin password:");
+                        String passcode = sc.nextLine();
+                        if (passcode.equals("Admin123") == false) {
+                            System.out.println("Wrong passwod,You are not the admin " + "\n");
+                            System.out.println("Returning to Main Menu..." + "\n");
+                            System.out.println("Press Enter to continue..." + "\n");
                             sc.nextLine();
-                            break;
-                        case 2:
-                            // call add item method
-                            admin.add_item(products, sc);
-                            System.out.println("Press Enter to continue..."+"\n");
-                            sc.nextLine();
-                            break;
-                        case 3:
-                            // call delete item method
-                            admin.delete_item(products, sc);
-                            System.out.println("Press Enter to continue..."+"\n");
-                            sc.nextLine();
-                            break;
-                        case 4:
-                            // call manage item method
-                            admin.manage_item(products, sc);
-                            System.out.println("Press Enter to continue..."+"\n");
-                            sc.nextLine();
-                            break;
-                        case 0:
-                        //while user enter 0 condition of while(adminRunning) turns to false and break the loop for admin menu
-                        System.out.println("Returning to Main menu!"+"\n");
-                        System.out.println("Press Enter to continue..."+"\n");
-                        sc.nextLine();
-                        adminRunning = false;
-                        break;
+                            continue;
+                        } else {
+                            System.out.println("Pls enter your name:");
+                            String adminName = sc.nextLine();
+                            System.out.println("Pls enter your admin ID:");
+                            String adminId = sc.nextLine();
+                            Admin admin = new Admin(adminName, adminId);
+                            System.out.println("\n");
+                            System.out.println("Welcome Admin " + admin.getName() + " with ID: " + admin.getId());
+                            System.out.println("\n");
+                            // Admin menu loop
+                            boolean adminRunning = true;
+                            while (adminRunning) {
+                                int adminChoice = -1;
+                                System.out.println("************** Admin Menu **************");
+                                System.out.println("1. View Products");
+                                System.out.println("2. Add Product");
+                                System.out.println("3. Remove Product");
+                                System.out.println("4. Edit Product");
+                                System.out.println("0. Return to Main Menu");
+                                System.out.println("***************************************");
+                                // if user input data besides integer return reason
+                                try {
+                                    adminChoice = sc.nextInt();
+                                    sc.nextLine();
+                                } catch (Exception e) {
+                                    System.out.println("Unavailable input,please enter a proper number." + "\n");
+                                    continue;
+                                }
+                                // stop wrong selection
+                                if (adminChoice < 0 || adminChoice > 4) {
+                                    System.out.println("Invalid section, pls insert again." + "\n");
+                                    continue;
+                                } else {
+                                    switch (adminChoice) {
+                                        case 1:
+                                            // call view products method
+                                            admin.view_products(products);
+                                            System.out.println("Press Enter to continue..." + "\n");
+                                            sc.nextLine();
+                                            break;
+                                        case 2:
+                                            // call add item method
+                                            admin.add_item(products, sc);
+                                            System.out.println("Press Enter to continue..." + "\n");
+                                            sc.nextLine();
+                                            break;
+                                        case 3:
+                                            // call delete item method
+                                            admin.delete_item(products, sc);
+                                            System.out.println("Press Enter to continue..." + "\n");
+                                            sc.nextLine();
+                                            break;
+                                        case 4:
+                                            // call manage item method
+                                            admin.manage_item(products, sc);
+                                            System.out.println("Press Enter to continue..." + "\n");
+                                            sc.nextLine();
+                                            break;
+                                        case 0:
+                                            // while user enter 0 condition of while(adminRunning) turns to false and break the loop for admin menu
+                                            System.out.println("Returning to Main menu!" + "\n");
+                                            System.out.println("Press Enter to continue..." + "\n");
+                                            sc.nextLine();
+                                            adminRunning = false;
+                                            break;
+                                    }
+                                }
+                            }
                         }
-
-                    }
+                        // exit admin case
+                        break;
+                        // case for customer
+                    case 2:
+                        System.out.println("Pls enter your name:");
+                        String customerName = sc.nextLine();
+                        System.out.println("Pls enter your customer ID:");
+                        String customerId = sc.nextLine();
+                        Customer customer = new Customer(customerName, customerId);
+                        System.out.println("\n");
+                        System.out.println("Welcome Customer " + customer.getName() + " with ID: " + customer.getId());
+                        System.out.println("\n");
+                        // customer menu loop
+                        boolean customerRunning = true;
+                        while (customerRunning) {
+                            int customerChoice = -1;
+                            System.out.println("************** Customer Menu **************");
+                            System.out.println("1. View Products");
+                            System.out.println("2. Add Product to Cart");
+                            System.out.println("3. Delete Product from Cart");
+                            System.out.println("4. Check Cart");
+                            System.out.println("0. Return to Main Menu");
+                            System.out.println("******************************************");
+                            // if user input data besides integer return error reason
+                            try {
+                                customerChoice = sc.nextInt();
+                                sc.nextLine();
+                            } catch (Exception e) {
+                                System.out.println("Unavailable input,please enter a proper number." + "\n");
+                                continue;
+                            }
+                            // if user insert num besides 0 to 4 print error message
+                            if (customerChoice < 0 || customerChoice > 4) {
+                                System.out.println("Invalid section, pls insert again." + "\n");
+                                continue;
+                            } else {
+                                switch (customerChoice) {
+                                    case 1:
+                                        // call view products method
+                                        customer.view_products(products);
+                                        System.out.println("Press Enter to continue..." + "\n");
+                                        sc.nextLine();
+                                        break;
+                                    case 2:
+                                        // call add to cart method
+                                        customer.add_to_cart(products, cart, sc);
+                                        System.out.println("Press Enter to continue..." + "\n");
+                                        sc.nextLine();
+                                        break;
+                                    case 3:
+                                        // call delete from cart method
+                                        customer.delete_from_cart(cart, sc);
+                                        System.out.println("Press Enter to continue..." + "\n");
+                                        sc.nextLine();
+                                        break;
+                                    case 4:
+                                        // call view cart method
+                                        customer.view_Cart(cart);
+                                        System.out.println("Press Enter to continue..." + "\n");
+                                        sc.nextLine();
+                                        break;
+                                    case 0:
+                                        // while user enter 0, condition of while(customerRunning) turns to false and break the loop for customer menu
+                                        System.out.println("Returning to Main Menu..." + "\n");
+                                        System.out.println("Press Enter to continue..." + "\n");
+                                        sc.nextLine();
+                                        customerRunning = false;
+                                        break;
+                                }
+                            }
+                        }
+                        break;
+                    case 0:
+                        // while user enter 0,condition of while(running) turns to false and break the loop of the system and quit
+                        System.out.println("Thanks for Using Market System. Goodbye!");
+                        running = false;
+                        break;
                 }
             }
-                //exit admin case
-                break;
-               
-            //case for customer
-            case 2:
-              System.out.println("Pls enter your name:");
-              String customerName = sc.nextLine();
-
-              System.out.println("Pls enter your customer ID:");
-              String customerId = sc.nextLine();
-
-              Customer customer = new Customer(customerName, customerId);
-
-              System.out.println("\n");
-              System.out.println("Welcome Customer " + customer.getName()+ " with ID: " +customer.getId() );
-              System.out.println("\n");
-
-              //customer menu loop
-              boolean customerRunning = true;
-                while (customerRunning) {
-                    int customerChoice = -1;
-
-                    System.out.println("************** Customer Menu **************");
-                    System.out.println("1. View Products");
-                    System.out.println("2. Add Product to Cart");
-                    System.out.println("3. Delete Product from Cart");
-                    System.out.println("4. Check Cart");
-                    System.out.println("0. Return to Main Menu");
-                    System.out.println("******************************************");
-                    
-                    //if user input data besides integer return error reason
-                    try{
-                    customerChoice = sc.nextInt();
-                    sc.nextLine();
-                    }
-                    catch(Exception e){
-                        System.out.println("Unavailable input,please enter a proper number."+"\n");
-                        continue;
-                       }
-
-                    //if user insert num besides 0 to 4 print error message
-                    if(customerChoice <0 || customerChoice >4){
-                    System.out.println("Invalid section, pls insert again."+"\n");
-                    continue;
-                    }
-                    else{
-                    switch (customerChoice) {
-                        case 1:
-                        //call view products method
-                            customer.view_products(products);
-                            System.out.println("Press Enter to continue..."+"\n");
-                            sc.nextLine();
-                            break;
-                        case 2:
-                        //call add to cart method
-                            customer.add_to_cart(products, cart, sc);
-                            System.out.println("Press Enter to continue..."+"\n");
-                            sc.nextLine();
-                            break;
-                        case 3:
-                        //call delete from cart method
-                            customer.delete_from_cart( cart, sc);
-                            System.out.println("Press Enter to continue..."+"\n");
-                            sc.nextLine();
-                            break;
-                        case 4:
-                        //call view cart method
-                            customer.view_Cart(cart);
-                            System.out.println("Press Enter to continue..."+"\n");  
-                            sc.nextLine();
-                            break;
-                        case 0:
-                        //while user enter 0, condition of while(customerRunning) turns to false and break the loop for customer menu
-                        System.out.println("Returning to Main Menu..."+"\n");
-                        System.out.println("Press Enter to continue..."+"\n");
-                        sc.nextLine();
-                        customerRunning = false;
-                        break;
-                    }
-                }
-                }
-                break;
-
-            case 0:
-            //while user enter 0,condition of while(running) turns to false and break the loop of the system and quit
-                System.out.println("Thanks for Using Market System. Goodbye!");
-                running = false;
-                break;
         }
+        sc.close();
     }
-    }
-    sc.close();
-}
 }
