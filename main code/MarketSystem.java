@@ -69,6 +69,7 @@ class Admin extends User{
 
     catch(Exception e){
         System.out.println("Unvailable value, enetr again"+"\n");
+        sc.nextLine();
         continue;
     }
  }
