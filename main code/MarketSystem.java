@@ -62,6 +62,7 @@ class Admin extends User{
     System.out.println("Enter the price of the product :");
     double Product_price= sc.nextDouble();
     sc.nextLine();
+
     //add name and price of new object into array
     products.add(new Product(Product_name,Product_price));
     break;
@@ -91,6 +92,8 @@ class Admin extends User{
     System.out.println("Choose the product (1,2,3....) to delete");
     int position=sc.nextInt();
     sc.nextLine();
+
+    //remove product at selected position from array
     products.remove(position-1);
     System.out.println("The product delete successfully"+"\n");
     break;
@@ -98,6 +101,7 @@ class Admin extends User{
 
     catch(Exception E){
         System.out.println("Unvailable value, enetr again"+"\n");
+        sc.nextLine();
         continue;
     }
  }
@@ -203,6 +207,16 @@ class Customer extends User{
         }
         }
     }
+    }
+    public void view_Cart(ArrayList<Product> cart){
+        for(int i=0; i<cart.size(); i++){
+            System.out.println((i+1) + ". " + cart.get(i).Product_name + " - RM " + cart.get(i).Product_price);
+        }
+        double total_price = 0.0;
+        for(int i=0; i<cart.size(); i++){
+            total_price += cart.get(i).Product_price;
+        }
+        System.out.println("Total price: RM "+ total_price+"\n");
     }
 }
 public class MarketSystem {
@@ -399,7 +413,10 @@ public class MarketSystem {
                             sc.nextLine();
                             break;
                         case 4:
-                            // Check cart logic
+                        //call view cart method
+                            customer.view_Cart(cart);
+                            System.out.println("Press Enter to continue..."+"\n");  
+                            sc.nextLine();
                             break;
                         case 0:
                         //while user enter 0, condition of while(customerRunning) turns to false and break the loop for customer menu
