@@ -46,6 +46,7 @@ abstract class User{
 }
 //class Admin extends subclass of User
 class Admin extends User{
+
     public Admin(String name, String id){
         super(name, id);
     }
@@ -180,6 +181,18 @@ public class MarketSystem {
             switch (select) {
             //case for admin
             case 1:
+
+            //check admin password to log in
+              System.out.println("Pls enter the admin password:");
+              String passcode = sc.nextLine();
+              if(passcode.equals("Admin123")==false){
+                System.out.println("Wrong passwod,You are not the admin "+"\n");
+                System.out.println("Returning to Main Menu..."+"\n");
+                System.out.println("Press Enter to continue..."+"\n");
+                sc.nextLine();
+                continue;
+              }
+              else{
               System.out.println("Pls enter your name:");
               String adminName = sc.nextLine();
 
@@ -258,6 +271,7 @@ public class MarketSystem {
 
                     }
                 }
+            }
                 //exit admin case
                 break;
                
