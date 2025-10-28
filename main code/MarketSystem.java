@@ -66,7 +66,7 @@ class Admin extends User{
     }
 
     catch(Exception e){
-        System.out.println("You fucking idiot, are you blind ?, enter properly");
+        System.out.println("Unvailable value, enetr again"+"\n");
         continue;
     }
  }
@@ -94,7 +94,7 @@ class Admin extends User{
     }
 
     catch(Exception E){
-        System.out.println("Wrong!!!!!");
+        System.out.println("Unvailable value, enetr again"+"\n");
         continue;
     }
  }
@@ -160,20 +160,20 @@ public class MarketSystem {
         System.out.println("**************    Enter 0 to quit       **************");
         System.out.println("******************************************************");
        
-        //if user input data besides integer return reason
+        //if user input data besides integer return error reason
         try{
         select = sc.nextInt();
         sc.nextLine();
        }
        catch(Exception e){
-        System.out.println("Did you think you enter valid input?, are you dum? please enter a number."+"\n");
+        System.out.println("Unavailable input,please enter a proper number."+"\n");
         sc.nextLine();
         continue;
        }
        
-       //stop wrong selection
-       if(select !=1 && select !=2 && select !=0 ){
-        System.out.println("Its there any num besides 0,1,2 ?,you idiot sandwich,try again."+"\n");
+       //if user insert num besides 0 to 4 print error message
+       if(select <0 || select >2 ){
+        System.out.println("Invalid section, pls insert again."+"\n");
         continue;
        }
        else{
@@ -212,13 +212,13 @@ public class MarketSystem {
                     }
 
                     catch(Exception e){
-                        System.out.println("Did you think you enter valid input?, are you dum? please enter a number."+"\n");
+                        System.out.println("Unavailable input,please enter a proper number."+"\n");
                         continue;
                        }
 
                     //stop wrong selection
-                    if(adminChoice !=1 && adminChoice !=2 && adminChoice !=0 && adminChoice !=3 && adminChoice !=4 ){
-                    System.out.println("Its there any num besides 0,1,2,3,4 ?,you idiot sandwich,try again."+"\n");
+                    if(adminChoice <0 || adminChoice >4 ){
+                    System.out.println("Invalid section, pls insert again."+"\n");
                     continue;
                     }
                     else{
@@ -288,16 +288,19 @@ public class MarketSystem {
                     System.out.println("0. Return to Main Menu");
                     System.out.println("******************************************");
                     
+                    //if user input data besides integer return error reason
                     try{
                     customerChoice = sc.nextInt();
                     sc.nextLine();
                     }
                     catch(Exception e){
-                        System.out.println("Did you think you enter valid input?, are you dum? please enter a number."+"\n");
+                        System.out.println("Unavailable input,please enter a proper number."+"\n");
                         continue;
                        }
-                    if(customerChoice !=1 && customerChoice !=2 && customerChoice  !=0 && customerChoice  !=3 && customerChoice  !=4 ){
-                    System.out.println("Its there any num besides 0,1,2,3,4 ?,you idiot sandwich,try again."+"\n");
+
+                    //if user insert num besides 0 to 4 print error message
+                    if(customerChoice <0 || customerChoice >4){
+                    System.out.println("Invalid section, pls insert again."+"\n");
                     continue;
                     }
                     else{
