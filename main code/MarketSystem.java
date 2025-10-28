@@ -54,9 +54,14 @@ class Admin extends User{
 
     //method to let admin add item into array
     public void add_item(ArrayList<Product> products,Scanner sc){
+
     System.out.println("Enter the name of the product :");
     String Product_name= sc.nextLine();
-
+    if (Product_name.isEmpty()) {
+        System.out.println("Product name cannot be empty. Please try again." + "\n");
+        ;
+    }
+    else{
     while(true){
     try{
     System.out.println("Enter the price of the product :");
@@ -67,7 +72,6 @@ class Admin extends User{
     products.add(new Product(Product_name,Product_price));
     break;
     }
-
     catch(Exception e){
         System.out.println("Unvailable value, enetr again"+"\n");
         sc.nextLine();
@@ -76,18 +80,20 @@ class Admin extends User{
  }
     System.out.println("Product add successfully"+"\n");
 }
+    }
 
     //method to let admin delete product
     public void delete_item(ArrayList<Product> products,Scanner sc){
     
-    //display product list for user
     if(products.size()==0){
-             System.out.println("No products available."+"\n");
+        System.out.println("No products available."+"\n");
     }
     else{
     while (true) {
+    ////display product list for user
     System.out.println("Product list: ");
     view_products(products);
+
     try{
     System.out.println("Choose the product (1,2,3....) to delete");
     int position=sc.nextInt();
