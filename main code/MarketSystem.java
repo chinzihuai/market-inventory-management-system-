@@ -63,16 +63,16 @@ class Admin extends User{
 
     //method to let admin add item into array
     public void add_item(ArrayList<Product> products,Scanner sc){
-
+    
+    while(true){
     System.out.println("Enter the name of the product :");
     String Product_name= sc.nextLine();
 
     if (Product_name.isEmpty()) {
         System.out.println("Product name cannot be empty. Please try again." + "\n");
+        continue;
     }
 
-    else{
-    while(true){
     try{
     System.out.println("Enter the price of the product :");
     double Product_price= sc.nextDouble();
@@ -95,7 +95,7 @@ class Admin extends User{
     }
  }
 }
-    }
+
 
     //method to let admin delete product
     public void delete_item(ArrayList<Product> products,Scanner sc){
@@ -167,18 +167,22 @@ class Admin extends User{
         System.out.println("Product name cannot be empty. Please try again." + "\n");
         continue;
         }
-        
-        else{
+
         products.get(edit-1).Product_name=new_name;
 
         System.out.println("Enter the new price for product");
         Double new_price=sc.nextDouble();
+
+        if(new_price<=0){
+        System.out.println("Price cannot be zero and negative, enter again"+"\n");
+        continue;
+        }
         products.get(edit-1).Product_price=new_price;
 
         System.out.println("Item change successfully"+"\n");
         break;
-        }
     }
+
         catch(Exception E){
             System.out.println("Unvaliable input, try again"+"\n");
             sc.nextLine();
@@ -197,10 +201,13 @@ class Customer extends User{
 
     //method to add product into cart (similar with the method of addItem in Admin class)
     public void add_to_cart(ArrayList<Product> products, ArrayList<Product> cart, Scanner sc){
+
         if(products.size()==0){
              System.out.println("No products available."+"\n");
         }
+
         else{
+        
         while (true) {
         //show products list every loops
         System.out.println("Product list: ");
@@ -210,6 +217,12 @@ class Customer extends User{
         System.out.println("Select the product to add to cart");
         int add=sc.nextInt();
         sc.nextLine();
+
+        if(add<1 || add>products.size()){
+            System.out.println("Unvailable product selected"+"\n");
+            pause(sc);
+            continue;
+        }
 
         //add selected product into cart array
         cart.add(products.get(add-1));
@@ -245,7 +258,12 @@ class Customer extends User{
         System.out.println("Select the product to delete from cart");
         int delete=sc.nextInt();
         sc.nextLine();
-
+        
+        if(delete<1 || delete>cart.size()){
+            System.out.println("Unvailable product selected"+"\n");
+            pause(sc);
+            continue;
+        }
         //remove selected product from cart array
         cart.remove(delete-1);
         System.out.println("Product removed from cart successfully"+"\n");
@@ -333,9 +351,23 @@ public class MarketSystem {
               else{
               System.out.println("Pls enter your name:");
               String adminName = sc.nextLine();
+                
+              //keep asking for name until user enter a valid name
+              while (adminName.isEmpty()) {
+              System.out.println("Name cannot be empty. Please try again." + "\n");
+              System.out.println("Pls enter your name:");
+              adminName = sc.nextLine();
+              }
 
               System.out.println("Pls enter your admin ID:");
               String adminId = sc.nextLine();
+
+              //keep asking for id until user enter a valid id
+              while (adminId.isEmpty()) {
+              System.out.println("ID cannot be empty. Please try again." + "\n");
+              System.out.println("Pls enter your name:");
+              adminId = sc.nextLine();
+              }
 
               Admin admin = new Admin(adminName, adminId); 
 
@@ -414,8 +446,22 @@ public class MarketSystem {
               System.out.println("Pls enter your name:");
               String customerName = sc.nextLine();
 
+              //keep asking for name until user enter a valid name
+              while(customerName.isEmpty()){
+              System.out.println("Name cannot be empty. Please try again." + "\n");
+              System.out.println("Pls enter your name:");
+              customerName = sc.nextLine();
+              }
+
               System.out.println("Pls enter your customer ID:");
               String customerId = sc.nextLine();
+
+              //keep asking for id until user enter a valid id
+              while(customerId.isEmpty()){
+              System.out.println("ID cannot be empty. Please try again." + "\n");
+              System.out.println("Pls enter your customer ID:");
+              customerId = sc.nextLine();
+              }
 
               Customer customer = new Customer(customerName, customerId);
 
