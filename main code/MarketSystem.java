@@ -4,11 +4,28 @@ import java.util.ArrayList;
 
 //class Product
 class Product{
-    public String Product_name;
-    public double Product_price;
+    private String Product_name;
+    private double Product_price;
 
     public Product(String name, double price){
         this.Product_name = name;
+        this.Product_price = price;
+    }
+
+    //getter
+    public String getName(){
+        return Product_name;
+    }
+
+    public double getPrice(){
+        return Product_price;
+    }
+
+    //setter
+    public void setName(String name){
+        this.Product_name = name;
+    }
+    public void setPrice(double price){
         this.Product_price = price;
     }
 }
@@ -43,7 +60,7 @@ abstract class User{
         //else print the item
         else{
         for(int i=0; i<products.size(); i++){
-            System.out.println((i+1) + ". " + products.get(i).Product_name + " - RM " + products.get(i).Product_price);
+            System.out.println((i+1) + ". " + products.get(i).getName() + " - RM " + products.get(i).getPrice());
         }
     }
     }
@@ -157,7 +174,7 @@ class Admin extends User{
         }
 
         //product.get(edit-1).Product_name means the Product_name at postion(edit-1)of array
-        System.out.println("Editing "+products.get(edit-1).Product_name+"\n");
+        System.out.println("Editing "+products.get(edit-1).getName()+"\n");
 
         System.out.println("Enter the new name for product");
         String new_name=sc.nextLine();
@@ -168,7 +185,7 @@ class Admin extends User{
         continue;
         }
 
-        products.get(edit-1).Product_name=new_name;
+        products.get(edit-1).setName(new_name);
 
         System.out.println("Enter the new price for product");
         Double new_price=sc.nextDouble();
@@ -177,7 +194,7 @@ class Admin extends User{
         System.out.println("Price cannot be zero and negative, enter again"+"\n");
         continue;
         }
-        products.get(edit-1).Product_price=new_price;
+        products.get(edit-1).setPrice(new_price);
 
         System.out.println("Item change successfully"+"\n");
         break;
@@ -252,7 +269,7 @@ class Customer extends User{
         //show cart list every loops
         System.out.println("Cart list: ");
         for(int i=0; i<cart.size(); i++){
-            System.out.println((i+1) + ". " + cart.get(i).Product_name + " - RM " + cart.get(i).Product_price);
+            System.out.println((i+1) + ". " + cart.get(i).getName()+ " - RM " + cart.get(i).getPrice());
         }
         try{
         System.out.println("Select the product to delete from cart");
@@ -287,11 +304,11 @@ class Customer extends User{
         }
         else{
         for(int i=0; i<cart.size(); i++){
-            System.out.println((i+1) + ". " + cart.get(i).Product_name + " - RM " + cart.get(i).Product_price);
+            System.out.println((i+1) + ". " + cart.get(i).getName() + " - RM " + cart.get(i).getPrice());
         }
         double total_price = 0.0;
         for(int i=0; i<cart.size(); i++){
-            total_price += cart.get(i).Product_price;
+            total_price += cart.get(i).getPrice();
         }
         System.out.println("Total price: RM "+ total_price+"\n");
     }
