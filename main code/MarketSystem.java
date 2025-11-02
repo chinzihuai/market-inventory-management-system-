@@ -113,7 +113,6 @@ class Admin extends User{
  }
 }
 
-
     //method to let admin delete product
     public void delete_item(ArrayList<Product> products,Scanner sc){
     
