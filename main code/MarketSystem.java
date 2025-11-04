@@ -59,9 +59,11 @@ abstract class User{
 
         //else print the item
         else{
+        System.out.println("Product list: ");
         for(int i=0; i<products.size(); i++){
             System.out.println((i+1) + ". " + products.get(i).getName() + " - RM " + products.get(i).getPrice());
         }
+        System.out.println("\n");
     }
     }
 
